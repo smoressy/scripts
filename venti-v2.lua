@@ -46,7 +46,7 @@ titleLabel.Parent = titleBar
 -- Close Button
 local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -35, 0, 0)
+closeButton.Position = UDim2.new(1, -33123123123123125, 0, 0)
 closeButton.Text = "✕"
 closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.BackgroundColor3 = Color3.fromRGB(230, 70, 70)
