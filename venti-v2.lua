@@ -1,112 +1,52 @@
--- player fling gui with updated UI
+-- player fling gui
 
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "PlayerFling"
-screenGui.Parent = game.CoreGui
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local TextButton = Instance.new("TextButton")
+local SuggestedText = Instance.new("TextLabel") -- New suggested text label
 
--- Main Frame
-local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 420, 0, 220)
-mainFrame.Position = UDim2.new(0.5, -210, 0.5, -110)
-mainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
-mainFrame.BorderSizePixel = 0
-mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-mainFrame.Parent = screenGui
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
 
--- Add rounded corners to mainFrame
-local mainFrameCorner = Instance.new("UICorner")
-mainFrameCorner.CornerRadius = UDim.new(0, 10)
-mainFrameCorner.Parent = mainFrame
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+Frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+Frame.Size = UDim2.new(0, 200, 0, 100)
+Frame.Active = true
+Frame.Draggable = true
 
--- Title Bar
-local titleBar = Instance.new("Frame")
-titleBar.Size = UDim2.new(1, 0, 0, 30)
-titleBar.BackgroundColor3 = Color3.fromRGB(45, 45, 50)
-titleBar.BorderSizePixel = 0
-titleBar.Parent = mainFrame
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.Position = UDim2.new(0.1, 0, 0.2, 0)
+TextBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderText = "Enter username"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 14
 
-local titleBarCorner = Instance.new("UICorner")
-titleBarCorner.CornerRadius = UDim.new(0, 10)
-titleBarCorner.Parent = titleBar
+SuggestedText.Parent = Frame -- New suggested text label settings
+SuggestedText.BackgroundTransparency = 1
+SuggestedText.Position = TextBox.Position
+SuggestedText.Size = TextBox.Size
+SuggestedText.Font = Enum.Font.SourceSans
+SuggestedText.Text = ""
+SuggestedText.TextColor3 = Color3.fromRGB(169, 169, 169) -- Gray text
+SuggestedText.TextSize = 14
+SuggestedText.TextXAlignment = Enum.TextXAlignment.Left
 
-local titleLabel = Instance.new("TextLabel")
-titleLabel.Size = UDim2.new(1, -50, 1, 0)
-titleLabel.Position = UDim2.new(0, 10, 0, 0)
-titleLabel.Text = "Player Fling"
-titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-titleLabel.BackgroundTransparency = 1
-titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 16
-titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-titleLabel.Parent = titleBar
-
--- Close Button
-local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -33123123123123125, 0, 0)
-closeButton.Text = "✕"
-closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeButton.BackgroundColor3 = Color3.fromRGB(230, 70, 70)
-closeButton.BorderSizePixel = 0
-closeButton.Font = Enum.Font.GothamBold
-closeButton.TextScaled = true
-closeButton.Parent = titleBar
-
-local closeButtonCorner = Instance.new("UICorner")
-closeButtonCorner.CornerRadius = UDim.new(0, 8)
-closeButtonCorner.Parent = closeButton
-
-closeButton.MouseButton1Click:Connect(function()
-    screenGui:Destroy()
-end)
-
--- Username Input
-local usernameInput = Instance.new("TextBox")
-usernameInput.Size = UDim2.new(0, 360, 0, 35)
-usernameInput.Position = UDim2.new(0, 30, 0, 50)
-usernameInput.PlaceholderText = "Enter Username"
-usernameInput.Text = ""
-usernameInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-usernameInput.BackgroundColor3 = Color3.fromRGB(50, 50, 55)
-usernameInput.BorderSizePixel = 0
-usernameInput.Font = Enum.Font.Gotham
-usernameInput.TextSize = 16
-usernameInput.Parent = mainFrame
-
-local usernameInputCorner = Instance.new("UICorner")
-usernameInputCorner.CornerRadius = UDim.new(0, 8)
-usernameInputCorner.Parent = usernameInput
-
--- Suggested Text Label
-local suggestedText = Instance.new("TextLabel")
-suggestedText.Parent = mainFrame
-suggestedText.BackgroundTransparency = 1
-suggestedText.Position = usernameInput.Position
-suggestedText.Size = usernameInput.Size
-suggestedText.Font = Enum.Font.Gotham
-suggestedText.Text = ""
-suggestedText.TextColor3 = Color3.fromRGB(169, 169, 169) -- Gray text
-suggestedText.TextSize = 16
-suggestedText.TextXAlignment = Enum.TextXAlignment.Left
-
--- Fling Button
-local flingButton = Instance.new("TextButton")
-flingButton.Size = UDim2.new(0, 360, 0, 35)
-flingButton.Position = UDim2.new(0, 30, 0, 95)
-flingButton.Text = "FLING!"
-flingButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-flingButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-flingButton.BorderSizePixel = 0
-flingButton.Font = Enum.Font.GothamBold
-flingButton.TextSize = 16
-flingButton.Parent = mainFrame
-
-local flingButtonCorner = Instance.new("UICorner")
-flingButtonCorner.CornerRadius = UDim.new(0, 8)
-flingButtonCorner.Parent = flingButton
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+TextButton.Position = UDim2.new(0.1, 0, 0.5, 0)
+TextButton.Size = UDim2.new(0.8, 0, 0.4, 0)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "FLING!"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 20
 
 -- Function to get a matching player
 local function GetPlayer(Name)
@@ -131,12 +71,22 @@ local function AutoFillSuggestions(Name)
     return ""
 end
 
--- Function to show notifications
+-- Continuously check players every second
+spawn(function()
+    while true do
+        -- Check current players
+        local playerList = Players:GetPlayers()
+
+        -- Any other actions needed for player list updates can be implemented here
+
+        task.wait(1) -- Check every second
+    end
+end)
+
 local function Message(_Title, _Text, Time)
     game:GetService("StarterGui"):SetCore("SendNotification", {Title = _Title, Text = _Text, Duration = Time})
 end
 
--- Function to perform the fling action
 local function SkidFling(TargetPlayer)
     local Character = Player.Character
     local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
@@ -196,79 +146,127 @@ local function SkidFling(TargetPlayer)
                         FPos(BasePart, CFrame.new(-2.25, -1.5, 2.25) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
                         task.wait()
 
-                        FPos(BasePart, CFrame.new(0, 0, 5) + THumanoid.MoveDirection * BasePart.Velocity.Magnitude / 1.25, CFrame.Angles(math.rad(Angle), 0, 0))
+                        FPos(BasePart, CFrame.new(0, 1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0) + THumanoid.MoveDirection,CFrame.Angles(math.rad(Angle), 0, 0))
+                        task.wait()
+                    else
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -THumanoid.WalkSpeed), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, THumanoid.WalkSpeed), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+                        
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, -TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, 1.5, TRootPart.Velocity.Magnitude / 1.25), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(math.rad(90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5 ,0), CFrame.Angles(math.rad(-90), 0, 0))
+                        task.wait()
+
+                        FPos(BasePart, CFrame.new(0, -1.5, 0), CFrame.Angles(0, 0, 0))
                         task.wait()
                     end
+                else
+                    break
                 end
-            until Time - tick() >= TimeToWait
+            until BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
         end
-
-        for _, x in pairs(TCharacter:GetChildren()) do
-            if x:IsA("BasePart") then
-                coroutine.wrap(function()
-                    SFBasePart(x)
-                end)()
+        
+        workspace.FallenPartsDestroyHeight = 0/0
+        
+        local BV = Instance.new("BodyVelocity")
+        BV.Name = "EpixVel"
+        BV.Parent = RootPart
+        BV.Velocity = Vector3.new(9e8, 9e8, 9e8)
+        BV.MaxForce = Vector3.new(1/0, 1/0, 1/0)
+        
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+        
+        if TRootPart and THead then
+            if (TRootPart.CFrame.p - THead.CFrame.p).Magnitude > 5 then
+                SFBasePart(THead)
+            else
+                SFBasePart(TRootPart)
             end
+        elseif TRootPart and not THead then
+            SFBasePart(TRootPart)
+        elseif not TRootPart and THead then
+            SFBasePart(THead)
+        elseif not TRootPart and not THead and Accessory and Handle then
+            SFBasePart(Handle)
+        else
+            return Message("Error Occurred", "Target is missing everything", 5)
         end
-    end
-end
-
-flingButton.MouseButton1Click:Connect(function()
-    local Target = GetPlayer(usernameInput.Text)
-    if Target then
-        SkidFling(Target)
+        
+        BV:Destroy()
+        Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+        workspace.CurrentCamera.CameraSubject = Humanoid
+        
+        repeat
+            RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
+            Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+            Humanoid:ChangeState("GettingUp")
+            table.foreach(Character:GetChildren(), function(_, x)
+                if x:IsA("BasePart") then
+                    x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new()
+                end
+            end)
+            task.wait()
+        until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+        workspace.FallenPartsDestroyHeight = getgenv().FPDH
     else
-        Message("Player Not Found", "Make sure the username is correct", 5)
+        return Message("Error Occurred", "Random error", 5)
     end
-end)
-
-usernameInput:GetPropertyChangedSignal("Text"):Connect(function()
-    suggestedText.Text = AutoFillSuggestions(usernameInput.Text)
-end)
-
-usernameInput.FocusLost:Connect(function(enterPressed)
-    if enterPressed then
-        local suggestion = AutoFillSuggestions(usernameInput.Text)
-        if suggestion ~= "" then
-            usernameInput.Text = suggestion
-        end
-    end
-end)
-
--- Enable dragging for the main frame
-local dragToggle = nil
-local dragSpeed = 0.125
-local dragInput = nil
-local dragStart = nil
-local startPos = nil
-
-local function updateInput(input)
-    local delta = input.Position - dragStart
-    mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
 
-mainFrame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragToggle = true
-        dragStart = input.Position
-        startPos = mainFrame.Position
+TextButton.MouseButton1Click:Connect(function()
+    local targetName = TextBox.Text
+    local targetPlayer = GetPlayer(targetName)
 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragToggle = false
-            end
-        end)
+    if targetPlayer then
+        SkidFling(targetPlayer)
+    else
+        Message("Error Occurred", "Invalid username", 5)
     end
 end)
 
-mainFrame.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        dragInput = input
+TextBox:GetPropertyChangedSignal("Text"):Connect(function()
+    local inputText = TextBox.Text
+    local suggestion = AutoFillSuggestions(inputText)
+
+    if suggestion ~= "" and #inputText > 0 then
+        SuggestedText.Text = suggestion -- Show suggestion
+    else
+        SuggestedText.Text = "" -- Clear suggestion if no match
     end
 end)
 
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if input == dragInput and dragToggle then
-        updateInput(input)
+TextBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed then
+        return -- Don't auto-complete if enter was pressed
+    end
+
+    local inputText = TextBox.Text
+    local suggestion = AutoFillSuggestions(inputText)
+
+    if suggestion ~= "" then
+        TextBox.Text = suggestion -- Auto-complete if text matches a suggestion
+        SuggestedText.Text = "" -- Clear suggestion
     end
 end)
